@@ -62,8 +62,8 @@ public class DemoCamera : MonoBehaviour {
         PlayerPos = Player.transform.position;
         //カメラの位置をプレイヤーからずらした位置に設定。
         Vector3 newPos = PlayerPos + StartOffsetPos;
-        newPos.z += PlayerToCameraMinDistance;
-        transform.position += newPos;
+        //newPos.z += PlayerToCameraMinDistance;
+        transform.position = newPos;
     }
 
     // Update is called once per frame
