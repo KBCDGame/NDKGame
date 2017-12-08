@@ -79,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Camera\DemoCamera.cs" />
-    <Compile Include="Assets\Script\NPC\NpcEvent.cs" />
+    <Compile Include="Assets\Script\Net\Connecter.cs" />
     <Compile Include="Assets\Script\Player\DemoPlayer.cs" />
     <Compile Include="Assets\Script\Player\Player.cs" />
   </ItemGroup>

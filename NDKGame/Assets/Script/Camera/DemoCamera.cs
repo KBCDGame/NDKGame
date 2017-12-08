@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class DemoCamera : MonoBehaviour {
-
+public class DemoCamera : MonoBehaviour
+{
     //プレイヤー。
     private GameObject Player = null;
     //プレイヤーの位置。
@@ -14,6 +15,7 @@ public class DemoCamera : MonoBehaviour {
     private float Scroll = 0.0f;
     //カメラが前後に移動したかどうかのフラグ。
     private bool IsMoveBeforeOrAfterFlag = false;
+
     ////カメラ。
     //private Camera GemaCamera = null;
     ////ズームに使う値保持用。
@@ -58,23 +60,43 @@ public class DemoCamera : MonoBehaviour {
         Player = GameObject.FindWithTag("Player");
         ////カメラ取得。
         //GemaCamera = GetComponent<Camera>();
-        //プレイヤーの位置取得。
-        PlayerPos = Player.transform.position;
-        //カメラの位置をプレイヤーからずらした位置に設定。
-        Vector3 newPos = PlayerPos + StartOffsetPos;
-        //newPos.z += PlayerToCameraMinDistance;
-        transform.position = newPos;
+
+        if (Player != null)
+        {
+            //プレイヤーの位置取得。
+            PlayerPos = Player.transform.position;
+            //カメラの位置をプレイヤーからずらした位置に設定。
+            Vector3 newPos = PlayerPos + StartOffsetPos;
+            transform.position = newPos;
+        }
+        Camera Demo = GetComponent<Camera>();
+        Demo.depth = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //プレイヤーの移動量分、自分(カメラ)も移動する
-        transform.position += Player.transform.position - PlayerPos;
-        PlayerPos = Player.transform.position;
+        //プレイヤーを検索。
+        if (FindPlayer() == false)
+        {
+            return;
+        }
 
         //Input関係の処理。
         InputRotate();
+    }
+
+    void FixedUpdate()
+    {
+        //プレイヤーを検索。
+        if (FindPlayer() == false)
+        {
+            return;
+        }
+
+        //プレイヤーの移動量分、自分(カメラ)も移動する
+        transform.position += Player.transform.position - PlayerPos;
+        PlayerPos = Player.transform.position;
 
         //PlayerPosの位置のY軸を中心に、回転（公転）する
         transform.RotateAround(PlayerPos, Vector3.up, InputX);
@@ -157,6 +179,29 @@ public class DemoCamera : MonoBehaviour {
         if ((value > 0.0f && Mathf.Abs(distance) < PlayerToCameraMaxDistance) || (value < 0.0f && Mathf.Abs(distance) > PlayerToCameraMinDistance))
         {
             transform.position += MovePos;
+        }
+    }
+
+    //プレイヤーがnullの間はプレイヤーを探す。
+    private bool FindPlayer()
+    {
+        if (Player == null)
+        {
+            //プレイヤー取得。
+            Player = GameObject.FindWithTag("Player");
+            if (Player != null)
+            {
+                //プレイヤーの位置取得。
+                PlayerPos = Player.transform.position;
+                //カメラの位置をプレイヤーからずらした位置に設定。
+                Vector3 newPos = PlayerPos + StartOffsetPos;
+                transform.position = newPos;
+            }
+            return false;
+        }
+        else
+        {
+            return true;
         }
     }
 }

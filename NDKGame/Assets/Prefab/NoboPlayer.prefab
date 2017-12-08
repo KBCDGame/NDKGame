@@ -24,6 +24,9 @@ GameObject:
   - component: {fileID: 23122425103979170}
   - component: {fileID: 143749016408665916}
   - component: {fileID: 114101640830146806}
+  - component: {fileID: 114744440606652304}
+  - component: {fileID: 114041897669381928}
+  - component: {fileID: 81088223031916500}
   m_Layer: 0
   m_Name: NoboPlayer
   m_TagString: Player
@@ -69,7 +72,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1037180647693042}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.37, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4483184010944220}
@@ -166,6 +169,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!81 &81088223031916500
+AudioListener:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1037180647693042}
+  m_Enabled: 1
+--- !u!114 &114041897669381928
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1037180647693042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 4
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!114 &114101640830146806
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -177,9 +208,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0af1f701732924384276ad1d9e9fea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 1
+  MoveSpeed: 5
   JumpSpeed: 9
   Gravity: 9
+--- !u!114 &114744440606652304
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1037180647693042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 23
+    i1: 163
+    i2: 158
+    i3: 255
+    i4: 203
+    i5: 83
+    i6: 35
+    i7: 100
+    i8: 171
+    i9: 151
+    i10: 37
+    i11: 254
+    i12: 5
+    i13: 17
+    i14: 255
+    i15: 210
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!136 &136251140975254796
 CapsuleCollider:
   m_ObjectHideFlags: 1
