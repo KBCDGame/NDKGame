@@ -6,7 +6,6 @@ using UnityEngine.Networking;
 
 public class DemoPlayer : NetworkBehaviour
 {
-
     //入力された値保持用。
     private float InputHorizontal = 0.0f;
     private float InputVertical = 0.0f;

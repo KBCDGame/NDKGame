@@ -47,7 +47,10 @@ public class DemoCamera : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //最大と最小が反転して設定されていた場合。
+        //最大と最小が反転して設定されていた場合は最大と最小を入れ替え。
+        //大小比較するために絶対値に直す。
+        PlayerToCameraMinDistance = Mathf.Abs(PlayerToCameraMinDistance);
+        PlayerToCameraMaxDistance = Mathf.Abs(PlayerToCameraMaxDistance);
         if (PlayerToCameraMinDistance > PlayerToCameraMaxDistance)
         {
             float work = PlayerToCameraMinDistance;
