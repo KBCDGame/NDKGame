@@ -78,10 +78,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Object\3D\Doi\Medieval_House\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Script\Camera\DemoCamera.cs" />
+    <Compile Include="Assets\Script\Net\Connecter.cs" />
+    <Compile Include="Assets\Script\NPC\NpcAi.cs" />
     <Compile Include="Assets\Script\NPC\NpcEvent.cs" />
     <Compile Include="Assets\Script\Player\DemoPlayer.cs" />
     <Compile Include="Assets\Script\Player\Player.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Object\3D\Doi\Haruko\ReadMe.txt" />
+    <None Include="Assets\Object\3D\Doi\Medieval_House\Info.txt" />
+    <None Include="Assets\Object\3D\Doi\nnj3de_crucarp\README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

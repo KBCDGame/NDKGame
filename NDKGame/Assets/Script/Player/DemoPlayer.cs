@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class DemoPlayer : MonoBehaviour {
-
+public class DemoPlayer : NetworkBehaviour
+{
     //入力された値保持用。
     private float InputHorizontal = 0.0f;
     private float InputVertical = 0.0f;
@@ -15,11 +17,16 @@ public class DemoPlayer : MonoBehaviour {
     [Header("重力。")]
     public float Gravity = 0.0f;
     //カメラ。
-    private GameObject Camera = null;
+    private GameObject DemoCamera = null;
+
     //キャラクターコントローラー。
     private CharacterController CharaCon = null;
     //移動方向。
     private Vector3 MoveDirection = Vector3.zero;
+
+    private string HostName;
+
+    private IPAddress[] Addresses;
 
     // Use this for initialization
     void Start()
@@ -27,12 +34,31 @@ public class DemoPlayer : MonoBehaviour {
         //キャラクターコントローラー取得。
         CharaCon = GetComponent<CharacterController>();
         //カメラ取得。
-        Camera = GameObject.Find("DemoCamera");
+        DemoCamera = GameObject.Find("DemoCamera");
+
+        HostName = Dns.GetHostName();    //自身のホスト名を取得。
+
+        Addresses = Dns.GetHostAddresses(HostName);
+
+        foreach (IPAddress address in Addresses)
+        {
+            // IPv4 のみを追加する
+            if (address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+            {
+                Debug.Log(address);
+
+            }
+        }
     }
 
     //Inputの入力漏れを無くすためこっちに記述。
     void Update()
     {
+        if (!isLocalPlayer)
+        {
+            return;
+        }
+
         //入力値を格納。
         InputHorizontal = Input.GetAxis("Horizontal");
         InputVertical = Input.GetAxis("Vertical");
@@ -53,11 +79,18 @@ public class DemoPlayer : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (DemoCamera == null)
+        {
+            //カメラ取得。
+            DemoCamera = GameObject.Find("DemoCamera");
+            return;
+        }
+
         // カメラの方向から、X-Z平面の単位ベクトルを取得
-        Vector3 cameraForward = Vector3.Scale(Camera.transform.forward, new Vector3(1.0f, 0.0f, 1.0f)).normalized;
+        Vector3 cameraForward = Vector3.Scale(DemoCamera.transform.forward, new Vector3(1.0f, 0.0f, 1.0f)).normalized;
 
         // 方向キーの入力値とカメラの向きから、移動方向を決定
-        Vector3 moveForward = cameraForward * InputVertical + Camera.transform.right * InputHorizontal;
+        Vector3 moveForward = cameraForward * InputVertical + DemoCamera.transform.right * InputHorizontal;
 
         // 移動方向にスピードを掛ける。
         MoveDirection.x = moveForward.x * MoveSpeed;
@@ -147,4 +180,5 @@ public class DemoPlayer : MonoBehaviour {
     //{
     //    Debug.Log("Down Key");
     //}	
+
 }

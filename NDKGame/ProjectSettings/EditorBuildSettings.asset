@@ -6,8 +6,5 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scene/DoiScene1.unity
-    guid: fa0025e0987037d4896634d98e7ff658
-  - enabled: 1
-    path: Assets/Scene/DoiScene2.unity
-    guid: 382209afad00c58428552069c87452bf
+    path: Assets/Scene/Nobo.unity
+    guid: cb9dc887d43e7f346b830cd79d730976
